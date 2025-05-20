@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace App\Lib;
 
 use Exception;
+use Illuminate\Support\Facades\Log;
 use Shopify\Auth\AccessTokenOnlineUserInfo;
 use Shopify\Auth\Session;
 use Shopify\Auth\SessionStorage;
-use Illuminate\Support\Facades\Log;
 
 class DbSessionStorage implements SessionStorage
 {

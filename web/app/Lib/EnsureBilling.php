@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Lib;
 
 use App\Exceptions\ShopifyBillingException;
-use Illuminate\Support\Facades\Log;
 use Shopify\Auth\Session;
 use Shopify\Clients\Graphql;
 use Shopify\Context;

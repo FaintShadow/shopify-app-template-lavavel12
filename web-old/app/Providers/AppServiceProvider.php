@@ -7,10 +7,10 @@ use App\Lib\Handlers\AppUninstalled;
 use App\Lib\Handlers\Privacy\CustomersDataRequest;
 use App\Lib\Handlers\Privacy\CustomersRedact;
 use App\Lib\Handlers\Privacy\ShopRedact;
-use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\URL;
-use Shopify\Context;
+use Illuminate\Support\ServiceProvider;
 use Shopify\ApiVersion;
+use Shopify\Context;
 use Shopify\Webhooks\Registry;
 use Shopify\Webhooks\Topics;
 
