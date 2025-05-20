@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
 use Shopify\ApiVersion;
 use Shopify\Context;
+use Shopify\Exception\MissingArgumentException;
 use Shopify\Webhooks\Registry;
 use Shopify\Webhooks\Topics;
 
@@ -26,16 +27,17 @@ class AppServiceProvider extends ServiceProvider
 
     /**
      * Bootstrap any application services.
+     * @throws MissingArgumentException
      */
     public function boot(): void
     {
-        $host = str_replace('https://', '', env('HOST', 'not_defined'));
+        $host = str_replace('https://', '', config('shopify.host', 'not_defined'));
 
-        $customDomain = env('SHOP_CUSTOM_DOMAIN', null);
+        $customDomain = config('shopify.shop_domain', null);
         Context::initialize(
-            env('SHOPIFY_API_KEY', 'not_defined'),
-            env('SHOPIFY_API_SECRET', 'not_defined'),
-            env('SCOPES', 'not_defined'),
+            config('shopify.api_key', 'not_defined'),
+            config('shopify.api_secret', 'not_defined'),
+            config('shopify.api_scopes', 'not_defined'),
             $host,
             new DbSessionStorage(),
             ApiVersion::LATEST,
@@ -47,7 +49,7 @@ class AppServiceProvider extends ServiceProvider
             (array)$customDomain,
         );
 
-        URL::forceRootUrl("https://$host");
+        URL::useOrigin("https://$host");
         URL::forceScheme('https');
 
         Registry::addHandler(Topics::APP_UNINSTALLED, new AppUninstalled());
